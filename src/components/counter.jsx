@@ -17,8 +17,15 @@ class Counter extends Component {
   render() {
     return (
       <React.Fragment>
-        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
+        <span style={{ fontSize: 15 }} className={this.getBadgeClasses()}>
+          {this.formatCount()}
+        </span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
         <ul>
           {this.state.tags.map((tag) => (
             <li key={tag}>{tag}</li>
@@ -37,6 +44,12 @@ class Counter extends Component {
     let classes = "badge m-2 badge-";
     return (classes += this.state.counter === 0 ? "warning" : "primary");
   }
+
+  // note that event handlers should not have parameter '()' when called
+  // need to bind the current object to the event handler
+  handleIncrement = () => {
+    this.setState({ counter: this.state.counter + 1 });
+  };
 }
 
 export default Counter;
